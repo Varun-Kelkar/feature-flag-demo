@@ -15,7 +15,6 @@ const RecipeFilter = memo(({ updateRecipes }: RecipeFilterProps) => {
 
   const handleFilterByTags = useCallback(
     (event: React.MouseEvent<HTMLSpanElement>) => {
-      console.log(event.target);
       const tagName = event.currentTarget.id;
       getRecipesByTag(tagName);
     },
@@ -39,7 +38,6 @@ const RecipeFilter = memo(({ updateRecipes }: RecipeFilterProps) => {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
-      console.log(data);
       setTags(data);
       setLoading(false);
     } catch (error) {

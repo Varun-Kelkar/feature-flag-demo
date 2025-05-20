@@ -26,8 +26,6 @@ const Recipes = () => {
       const data = await response.json();
       setRecipes(data.recipes);
       setLoading(false);
-      // For debugging purposes
-      console.log(data);
     } catch (error) {
       console.error("Error fetching recipes:", error);
     }
