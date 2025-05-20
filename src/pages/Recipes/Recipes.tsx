@@ -3,20 +3,17 @@ import styles from "./Recipes.module.scss";
 import RecipeCard, {
   type Recipe,
 } from "../../components/RecipeCard/RecipeCard";
+import RecipeFilter from "../../components/RecipeFilter/RecipeFilter";
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState<Array<Recipe>>([]);
-  const [tags, setTags] = useState<Array<string>>([]);
   const [loading, setLoading] = useState(true);
 
-  const handleFilterByTags = useCallback(
-    (event: React.MouseEvent<HTMLSpanElement>) => {
-      const tagName = event.currentTarget.id;
-      getRecipesByTag(tagName);
-    },
-    []
-  );
-  const loadRecipes = async () => {
+  const updateRecipes = useCallback((recipes: Array<Recipe>) => {
+    setRecipes(recipes);
+  }, []);
+
+  const loadRecipes = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch(
@@ -33,42 +30,10 @@ const Recipes = () => {
     } catch (error) {
       console.error("Error fetching recipes:", error);
     }
-  };
-
-  const getAllRecipeTags = useCallback(async () => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/recipes/tags`
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      console.log(data);
-      setTags(data);
-    } catch (error) {
-      console.error("Error fetching recipe tags:", error);
-    }
-  }, []);
-
-  const getRecipesByTag = useCallback(async (tagName: string) => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/recipes/tag/${tagName}`
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      const data = await response.json();
-      setRecipes(data.recipes);
-    } catch (error) {
-      console.error("Error fetching recipes by tag:", error);
-    }
   }, []);
 
   useEffect(() => {
     loadRecipes();
-    getAllRecipeTags();
   }, []);
 
   return (
@@ -85,15 +50,7 @@ const Recipes = () => {
         />
       </section>
       <section className={styles.filters}>
-        {tags.length > 0 && !loading ? (
-          tags.map((tag) => (
-            <span className={styles.chip} onClick={handleFilterByTags} id={tag}>
-              {tag}
-            </span>
-          ))
-        ) : (
-          <div>Loading Tags...</div>
-        )}
+        <RecipeFilter updateRecipes={updateRecipes} />
       </section>
       <section className={styles.recipes}>
         {recipes.length > 0 && !loading ? (
