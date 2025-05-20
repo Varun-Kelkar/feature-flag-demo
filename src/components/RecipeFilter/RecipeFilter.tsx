@@ -63,6 +63,7 @@ const RecipeFilter = memo(({ updateRecipes }: RecipeFilterProps) => {
   useEffect(() => {
     getAllRecipeTags();
   }, []);
+
   return (
     <div className={styles.filtersContainer}>
       <h3>Filters</h3>
