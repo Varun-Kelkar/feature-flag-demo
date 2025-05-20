@@ -12,6 +12,10 @@ const Recipes = () => {
   const [loading, setLoading] = useState(true);
 
   const updateRecipes = useCallback((recipes: Array<Recipe>) => {
+    if (!recipes.length) {
+      loadRecipes();
+      return;
+    }
     setRecipes(recipes);
   }, []);
 

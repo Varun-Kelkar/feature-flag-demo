@@ -9,6 +9,20 @@
   background-color: $light;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .filtersHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    .clearFilters {
+      font-weight: 500;
+    }
+    .clearFilters:hover {
+      color: $primary;
+      cursor: pointer;
+    }
+  }
   .filters {
     display: flex;
     gap: 0.5rem;
@@ -28,18 +42,17 @@
       border-radius: 20px;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
+    }
 
-      &:hover {
-        background-color: $primary;
-        color: white;
-        border-color: darken($primary, 5%);
-      }
+    .chip:hover {
+      background-color: $primary;
+      color: white;
+      border-color: darken($primary, 5%);
+    }
 
-      &.active {
-        background-color: $accent;
-        color: white;
-        border-color: darken($accent, 10%);
-      }
+    .active {
+      background-color: $primary;
+      color: white;
     }
 
     .select {

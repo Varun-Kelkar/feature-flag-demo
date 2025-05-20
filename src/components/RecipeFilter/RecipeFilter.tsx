@@ -9,6 +9,7 @@ type RecipeFilterProps = {
 
 const RecipeFilter = memo(({ updateRecipes }: RecipeFilterProps) => {
   const [tags, setTags] = useState<Array<string>>([]);
+  const [activeTag, setActiveTag] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   const isMobile = useIsMobile(768);
@@ -17,6 +18,7 @@ const RecipeFilter = memo(({ updateRecipes }: RecipeFilterProps) => {
     (event: React.MouseEvent<HTMLSpanElement>) => {
       const tagName = event.currentTarget.id;
       getRecipesByTag(tagName);
+      setActiveTag(tagName);
     },
     []
   );
@@ -25,9 +27,16 @@ const RecipeFilter = memo(({ updateRecipes }: RecipeFilterProps) => {
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const tagName = event.target.value;
       getRecipesByTag(tagName);
+      setActiveTag(tagName);
     },
     []
   );
+
+  const handleClearAllFilters = useCallback(() => {
+    setActiveTag(null);
+    updateRecipes([]);
+  }, []);
+
   const getAllRecipeTags = useCallback(async () => {
     try {
       setLoading(true);
@@ -66,7 +75,13 @@ const RecipeFilter = memo(({ updateRecipes }: RecipeFilterProps) => {
 
   return (
     <div className={styles.filtersContainer}>
-      <h3>Filters</h3>
+      <header className={styles.filtersHeader}>
+        <h3>Filters</h3>
+        <span className={styles.clearFilters} onClick={handleClearAllFilters}>
+          Clear Filters
+        </span>
+      </header>
+
       <section className={styles.filters}>
         {loading && <div>Loading Tags...</div>}
         {isMobile && !loading && tags.length > 0 && (
@@ -76,7 +91,11 @@ const RecipeFilter = memo(({ updateRecipes }: RecipeFilterProps) => {
               name="tags"
               className={styles.select}
               onChange={handleFilterByTagsSelect}
+              value={activeTag || ""}
             >
+              <option value="" disabled selected>
+                Select a tag
+              </option>
               {tags.map((tag) => (
                 <option key={tag} value={tag} id={tag}>
                   {tag}
@@ -89,7 +108,13 @@ const RecipeFilter = memo(({ updateRecipes }: RecipeFilterProps) => {
           !loading &&
           tags.length > 0 &&
           tags.map((tag) => (
-            <span className={styles.chip} onClick={handleFilterByTags} id={tag}>
+            <span
+              className={`${styles.chip} ${
+                activeTag === tag ? styles.active : ""
+              }`}
+              onClick={handleFilterByTags}
+              id={tag}
+            >
               {tag}
             </span>
           ))}
