@@ -4,6 +4,7 @@ import RecipeCard, {
   type Recipe,
 } from "../../components/RecipeCard/RecipeCard";
 import RecipeFilter from "../../components/RecipeFilter/RecipeFilter";
+import FeatureFlag from "../../components/FeatureFlag/FeatureFlag";
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState<Array<Recipe>>([]);
@@ -50,7 +51,12 @@ const Recipes = () => {
         />
       </section>
       <section className={styles.filters}>
-        <RecipeFilter updateRecipes={updateRecipes} />
+        <FeatureFlag
+          flagName="filterByTags"
+          fallback={<div>Search filters coming soon...</div>}
+        >
+          <RecipeFilter updateRecipes={updateRecipes} />
+        </FeatureFlag>
       </section>
       <section className={styles.recipes}>
         {recipes.length > 0 && !loading ? (
