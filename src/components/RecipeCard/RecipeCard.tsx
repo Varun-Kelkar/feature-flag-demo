@@ -28,6 +28,7 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
       <img
         src={recipe.image}
         alt="Recipe Image"
+        loading="lazy"
         className={styles.recipeImage}
       />
       <div className={styles.recipeDetails}>

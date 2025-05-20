@@ -94,7 +94,7 @@ const RecipeFilter = memo(({ updateRecipes }: RecipeFilterProps) => {
               value={activeTag || ""}
             >
               <option value="" disabled selected>
-                Select a tag
+                Select a category
               </option>
               {tags.map((tag) => (
                 <option key={tag} value={tag} id={tag}>
@@ -114,6 +114,7 @@ const RecipeFilter = memo(({ updateRecipes }: RecipeFilterProps) => {
               }`}
               onClick={handleFilterByTags}
               id={tag}
+              key={tag}
             >
               {tag}
             </span>
