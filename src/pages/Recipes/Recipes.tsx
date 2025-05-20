@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import styles from "./Recipes.module.scss";
+import { debounce } from "lodash";
 import RecipeCard, {
   type Recipe,
 } from "../../components/RecipeCard/RecipeCard";
 import RecipeFilter from "../../components/RecipeFilter/RecipeFilter";
 import FeatureFlag from "../../components/FeatureFlag/FeatureFlag";
+import styles from "./Recipes.module.scss";
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState<Array<Recipe>>([]);
@@ -31,6 +32,31 @@ const Recipes = () => {
     }
   }, []);
 
+  const handleSearchRecipes = useCallback(
+    debounce(async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const searchTerm = event.target.value;
+      if (searchTerm) {
+        try {
+          const response = await fetch(
+            `${
+              import.meta.env.VITE_API_BASE_URL
+            }/recipes/search?q=${searchTerm}`
+          );
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const data = await response.json();
+          setRecipes(data.recipes);
+        } catch (error) {
+          console.error("Error fetching recipes:", error);
+        }
+      } else {
+        loadRecipes();
+      }
+    }, 1000),
+    []
+  );
+
   useEffect(() => {
     loadRecipes();
   }, []);
@@ -45,6 +71,7 @@ const Recipes = () => {
         <input
           type="search"
           placeholder="Search for recipes..."
+          onInput={handleSearchRecipes}
           className={styles.searchInput}
         />
       </section>
