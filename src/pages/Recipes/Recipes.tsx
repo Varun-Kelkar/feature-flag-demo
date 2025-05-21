@@ -80,7 +80,7 @@ const Recipes = () => {
       </section>
       <section className={styles.filters}>
         <FeatureFlag
-          flagName="filterByTags"
+          flagName="filter-by-tags"
           fallback={<div>Search filters coming soon...</div>}
         >
           <RecipeFilter updateRecipes={updateRecipes} />
