@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { debounce } from "lodash";
-import RecipeCard, {
-  type Recipe,
-} from "../../components/RecipeCard/RecipeCard";
+import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import RecipeFilter from "../../components/RecipeFilter/RecipeFilter";
 import FeatureFlag from "../../components/FeatureFlag/FeatureFlag";
 import styles from "./Recipes.module.scss";
+import type { Recipe } from "../../types/recipe";
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState<Array<Recipe>>([]);

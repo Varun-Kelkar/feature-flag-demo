@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import App from "./App";
 import Hero from "./components/Hero/Hero";
 import Recipes from "./pages/Recipes/Recipes";
+import RecipeDetails from "./pages/Recipes/RecipeDetails/RecipeDetails";
 
 export const routes = createBrowserRouter([
   {
@@ -9,7 +10,19 @@ export const routes = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, Component: Hero },
-      { path: "recipes", Component: Recipes },
+      {
+        path: "recipes",
+        children: [
+          {
+            index: true,
+            Component: Recipes,
+          },
+          {
+            path: ":recipeId",
+            Component: RecipeDetails,
+          },
+        ],
+      },
     ],
   },
 ]);

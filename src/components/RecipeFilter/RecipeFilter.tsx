@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useEffect, useState } from "react";
-import type { Recipe } from "../RecipeCard/RecipeCard";
 import styles from "./RecipeFilter.module.scss";
 import useIsMobile from "../../hooks/useIsMobile";
+import type { Recipe } from "../../types/recipe";
 
 type RecipeFilterProps = {
   updateRecipes: (recipes: Array<Recipe>) => void;

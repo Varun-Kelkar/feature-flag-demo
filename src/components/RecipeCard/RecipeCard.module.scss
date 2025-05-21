@@ -22,7 +22,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem;
+    padding: $spacing-sm;
     gap: 0.5rem;
   }
+}
+
+.recipeCard:hover {
+  border-color: $primary;
+  transition: background-color 0.3s ease;
 }
