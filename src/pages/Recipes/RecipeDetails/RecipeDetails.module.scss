@@ -19,14 +19,13 @@
 
     .recipeImageAndMetadata {
       display: flex;
-
+      min-height: 350px;
       gap: $spacing-lg;
       margin-bottom: $spacing-md;
-
       .recipeImage {
         flex: 1;
         width: 50%;
-        aspect-ratio: 16/9;
+        aspect-ratio: 16 / 9;
         object-fit: cover;
         border-radius: 8px;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
@@ -35,7 +34,7 @@
       @media (max-width: $breakpoint-md) {
         .recipeImage {
           width: 100%;
-          aspect-ratio: 16/9;
+          aspect-ratio: 16 / 9;
         }
         .recipeMetadata {
           width: 100%;
@@ -155,5 +154,14 @@
     background-color: $primary;
     color: white;
     border-color: darken($primary, 5%);
+  }
+
+  .fallbackContainer {
+    background-color: #ffffff;
+    padding: 1rem;
+    width: 100%;
+    .fallbackMessage {
+      @extend .headings;
+    }
   }
 }

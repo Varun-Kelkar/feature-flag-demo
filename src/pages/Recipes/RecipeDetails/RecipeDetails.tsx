@@ -59,49 +59,44 @@ const RecipeDetails = () => {
             />
           </div>
           <section className={styles.recipeMetadata}>
-            <FeatureFlag
-              flagName="foodies-premium-features"
-              fallback={<div>Feature available only for premium users</div>}
-            >
-              <div className={styles.recipeMetadataItem}>
-                <label>Meal Type</label>
-                <div>
-                  {recipe.mealType.map((type) => (
-                    <span key={type}>{type} </span>
-                  ))}
-                </div>
+            <div className={styles.recipeMetadataItem}>
+              <label>Meal Type</label>
+              <div>
+                {recipe.mealType.map((type) => (
+                  <span key={type}>{type} </span>
+                ))}
               </div>
-              <div className={styles.recipeMetadataItem}>
-                <label>Cuisine </label>
-                <span>{recipe.cuisine}</span>
-              </div>
-              <div className={styles.recipeMetadataItem}>
-                <label>Rating</label>
-                <span>
-                  {recipe.rating} ⭐ ({recipe.reviewCount})
-                </span>
-              </div>
-              <div className={styles.recipeMetadataItem}>
-                <label>Cook Time</label>
-                <span>{recipe.cookTimeMinutes} mins</span>
-              </div>
-              <div className={styles.recipeMetadataItem}>
-                <label>Prep Time</label>
-                <span>{recipe.prepTimeMinutes} mins</span>
-              </div>
-              <div className={styles.recipeMetadataItem}>
-                <label>Servings</label>
-                <span>{recipe.servings}</span>
-              </div>
-              <div className={styles.recipeMetadataItem}>
-                <label>Difficulty</label>
-                <span>{recipe.difficulty}</span>
-              </div>
-              <div className={styles.recipeMetadataItem}>
-                <label>Calories</label>
-                <span>{recipe.caloriesPerServing} kcal</span>
-              </div>
-            </FeatureFlag>
+            </div>
+            <div className={styles.recipeMetadataItem}>
+              <label>Cuisine </label>
+              <span>{recipe.cuisine}</span>
+            </div>
+            <div className={styles.recipeMetadataItem}>
+              <label>Rating</label>
+              <span>
+                {recipe.rating} ⭐ ({recipe.reviewCount})
+              </span>
+            </div>
+            <div className={styles.recipeMetadataItem}>
+              <label>Cook Time</label>
+              <span>{recipe.cookTimeMinutes} mins</span>
+            </div>
+            <div className={styles.recipeMetadataItem}>
+              <label>Prep Time</label>
+              <span>{recipe.prepTimeMinutes} mins</span>
+            </div>
+            <div className={styles.recipeMetadataItem}>
+              <label>Servings</label>
+              <span>{recipe.servings}</span>
+            </div>
+            <div className={styles.recipeMetadataItem}>
+              <label>Difficulty</label>
+              <span>{recipe.difficulty}</span>
+            </div>
+            <div className={styles.recipeMetadataItem}>
+              <label>Calories</label>
+              <span>{recipe.caloriesPerServing} kcal</span>
+            </div>
           </section>
           <section className={styles.recipeTags}>
             <div>Search By</div>
@@ -124,12 +119,17 @@ const RecipeDetails = () => {
             </div>
           </section>
           <section className={styles.recipeInstructions}>
-            <div>Instructions</div>
-            <ul>
-              {recipe.instructions.map((instruction, index) => (
-                <li key={index}>{instruction}</li>
-              ))}
-            </ul>
+            <FeatureFlag
+              flagName="foodies-premium-features"
+              fallback={<FeatureFallBack />}
+            >
+              <div>Instructions</div>
+              <ul>
+                {recipe.instructions.map((instruction, index) => (
+                  <li key={index}>{instruction}</li>
+                ))}
+              </ul>
+            </FeatureFlag>
           </section>
         </section>
       )}
@@ -138,3 +138,14 @@ const RecipeDetails = () => {
 };
 
 export default RecipeDetails;
+
+const FeatureFallBack = () => {
+  return (
+    <div className={styles.fallbackContainer}>
+      <div>🔐</div>
+      <p className={styles.fallbackMessage}>
+        Instructions available for premium users only.
+      </p>
+    </div>
+  );
+};
