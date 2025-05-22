@@ -5,8 +5,6 @@
 
 This app uses [LaunchDarkly](https://launchdarkly.com/) to toggle Filters features without redeploying.
 
-### Example Flags:
-- `filter-by-tags`: Enable/disable filters section
 ---
 
 ## 🛠️ Setup & Installation
@@ -28,8 +26,10 @@ touch .env
 
 Please configure following env variables in your .env file
 
+```plaintext
 VITE_API_BASE_URL=https://dummyjson.com
 VITE_LAUNCH_DARKLY_CLIENT_ID=<your-launch-darkly-client-id>
+```
 
 ---
 
@@ -55,6 +55,9 @@ password - impossible
 
 Currently, i've configured two feature flags, one for filters on recipes page & another one for premium users in recipe details page
 The user with free plan cannot view recipe instructions.
+
+- `filter-by-tags`: Enable / Disable filters on recipes page.
+- `foodies-premium-users` : Show / Hide recipe instructions depending on user plan on recipe detail page.
 
 #### Incase you're interested in configuring flags yourself,
 
