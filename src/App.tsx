@@ -1,25 +1,15 @@
-import { Link, Outlet, useNavigate } from "react-router";
+import { Link, Outlet } from "react-router";
 import styles from "./App.module.scss";
-import { useUser } from "./userContext";
+import LogoutButton from "./components/LogoutButton/LogoutButton";
 
 function App() {
-  const { logout } = useUser();
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate("/");
-  };
-
   return (
     <main className={styles.app}>
       <header className={styles.appHeader}>
         <Link to="/">
           <h2>Foodies</h2>
         </Link>
-        <button className={styles.logoutButton} onClick={handleLogout}>
-          Logout
-        </button>
+        <LogoutButton />
       </header>
       <div className={styles.appContent}>
         <Outlet />

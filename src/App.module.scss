@@ -17,21 +17,6 @@
     padding: $spacing-md;
     background-color: #c44536;
     color: white;
-
-    .logoutButton {
-      background-color: lighten($primary, 5%);
-      color: white;
-      border: none;
-      padding: $spacing-sm;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.3s;
-
-      &:hover {
-        background-color: darken($primary, 10%);
-      }
-    }
   }
 
   .appContent {
