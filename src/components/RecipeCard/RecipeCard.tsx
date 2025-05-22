@@ -12,7 +12,7 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
     navigate(`/recipes/${recipe.id}`);
   };
   return (
-    <div className={styles.recipeCard} onClick={navigateToRecipeDetails}>
+    <div className={styles.recipeCard}>
       <img
         src={recipe.image}
         alt="Recipe Image"
@@ -22,10 +22,13 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
       <div className={styles.recipeDetails}>
         <div>
           <h3>{recipe.name}</h3>
-          <span>Rating : {recipe.rating}</span>
         </div>
-        <div>Difficuly {recipe.difficulty}</div>
-        <div>Calories {recipe.caloriesPerServing}</div>
+        <button
+          className={styles.recipeButton}
+          onClick={navigateToRecipeDetails}
+        >
+          View Recipe
+        </button>
       </div>
     </div>
   );
