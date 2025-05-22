@@ -6,7 +6,7 @@ export default function Hero() {
   const navigate = useNavigate();
 
   const handleNavigation = useCallback(() => {
-    navigate("/recipes");
+    navigate("/login");
   }, []);
 
   return (

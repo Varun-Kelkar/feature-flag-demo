@@ -19,3 +19,8 @@ body {
   width: 100%;
   min-height: 100dvh;
 }
+
+#root {
+  text-align: center;
+  width: 100%;
+}

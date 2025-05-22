@@ -3,6 +3,8 @@ import App from "./App";
 import Hero from "./components/Hero/Hero";
 import Recipes from "./pages/Recipes/Recipes";
 import RecipeDetails from "./pages/Recipes/RecipeDetails/RecipeDetails";
+import LoginPage from "./pages/Login/Login";
+import Signup from "./pages/Signup/Signup";
 
 export const routes = createBrowserRouter([
   {
@@ -10,6 +12,14 @@ export const routes = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, Component: Hero },
+      {
+        path: "login",
+        Component: LoginPage,
+      },
+      {
+        path: "signup",
+        Component: Signup,
+      },
       {
         path: "recipes",
         children: [

@@ -5,8 +5,12 @@ import RecipeFilter from "../../components/RecipeFilter/RecipeFilter";
 import FeatureFlag from "../../components/FeatureFlag/FeatureFlag";
 import styles from "./Recipes.module.scss";
 import type { Recipe } from "../../types/recipe";
+import { useUser } from "../../userContext";
+import { useNavigate } from "react-router";
 
 const Recipes = () => {
+  const { user } = useUser();
+  const navigate = useNavigate();
   const [recipes, setRecipes] = useState<Array<Recipe>>([]);
   const [loading, setLoading] = useState(true);
 
@@ -60,8 +64,17 @@ const Recipes = () => {
     []
   );
 
+  const verifyUser = () => {
+    if (!user) {
+      navigate("/login");
+      return;
+    } else {
+      loadRecipes();
+    }
+  };
+
   useEffect(() => {
-    loadRecipes();
+    verifyUser();
   }, []);
 
   return (

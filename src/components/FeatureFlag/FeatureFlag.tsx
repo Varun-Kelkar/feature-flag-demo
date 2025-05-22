@@ -1,5 +1,6 @@
 import React from "react";
 import { useLaunchDarkly } from "../../hooks/useLaunchDarkly";
+import { useUser, type User } from "../../userContext";
 
 type FeatureFlagProps = {
   flagName: string;
@@ -12,7 +13,8 @@ const FeatureFlag = ({
   children,
   fallback = null,
 }: FeatureFlagProps) => {
-  const { flags } = useLaunchDarkly();
+  const { user } = useUser();
+  const { flags } = useLaunchDarkly(user as User);
 
   return <>{flags[flagName] ? <>{children}</> : <>{fallback}</>}</>;
 };

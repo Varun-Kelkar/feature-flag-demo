@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { Recipe } from "../../../types/recipe";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import styles from "./RecipeDetails.module.scss";
+import FeatureFlag from "../../../components/FeatureFlag/FeatureFlag";
+import { useUser } from "../../../userContext";
 const RecipeDetails = () => {
+  const { user } = useUser();
+  const navigate = useNavigate();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState(true);
   const { recipeId } = useParams();
@@ -23,10 +27,19 @@ const RecipeDetails = () => {
     }
   };
 
-  useEffect(() => {
-    if (recipeId) {
-      getRecipeById(recipeId);
+  const verifyUser = useCallback(() => {
+    if (!user) {
+      navigate("/login");
+      return;
+    } else {
+      if (recipeId) {
+        getRecipeById(recipeId);
+      }
     }
+  }, []);
+
+  useEffect(() => {
+    verifyUser();
   }, [recipeId]);
 
   return (
@@ -44,7 +57,12 @@ const RecipeDetails = () => {
               loading="lazy"
               className={styles.recipeImage}
             />
-            <div className={styles.recipeMetadata}>
+          </div>
+          <section className={styles.recipeMetadata}>
+            <FeatureFlag
+              flagName="foodies-premium-features"
+              fallback={<div>Feature available only for premium users</div>}
+            >
               <div className={styles.recipeMetadataItem}>
                 <label>Meal Type</label>
                 <div>
@@ -56,6 +74,12 @@ const RecipeDetails = () => {
               <div className={styles.recipeMetadataItem}>
                 <label>Cuisine </label>
                 <span>{recipe.cuisine}</span>
+              </div>
+              <div className={styles.recipeMetadataItem}>
+                <label>Rating</label>
+                <span>
+                  {recipe.rating} ⭐ ({recipe.reviewCount})
+                </span>
               </div>
               <div className={styles.recipeMetadataItem}>
                 <label>Cook Time</label>
@@ -77,13 +101,7 @@ const RecipeDetails = () => {
                 <label>Calories</label>
                 <span>{recipe.caloriesPerServing} kcal</span>
               </div>
-            </div>
-          </div>
-          <section className={styles.recipeRating}>
-            <div>Rating</div>
-            <span>
-              {recipe.rating} ⭐ ({recipe.reviewCount})
-            </span>
+            </FeatureFlag>
           </section>
           <section className={styles.recipeTags}>
             <div>Search By</div>

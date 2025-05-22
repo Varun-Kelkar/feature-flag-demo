@@ -1,0 +1,56 @@
+@import "../../styles/variables.scss";
+
+.authContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: $spacing-lg;
+  background-color: $light;
+  height: 100%;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: $spacing-lg;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+
+  h2 {
+    margin-bottom: $spacing-md;
+    color: $dark;
+    text-align: center;
+  }
+
+  input {
+    padding: $spacing-sm;
+    margin-bottom: $spacing-md;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: $font-main;
+  }
+
+  button {
+    background-color: $primary;
+    color: white;
+    border: none;
+    padding: $spacing-sm;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: darken($primary, 10%);
+    }
+  }
+
+  .error{
+    color: $error;
+    font-size: 0.875rem;
+    margin-top: $spacing-sm;
+  }
+}
