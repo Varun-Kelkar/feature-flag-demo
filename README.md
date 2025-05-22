@@ -3,7 +3,7 @@
 
 ## 🚩 Feature Flags with LaunchDarkly
 
-This app uses [LaunchDarkly](https://launchdarkly.com/) to toggle Filters features without redeploying.
+This app uses [LaunchDarkly](https://launchdarkly.com/) to toggle features without having the need to redeploy them.
 
 ---
 
