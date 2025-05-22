@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import styles from "./RecipeFilter.module.scss";
 import useIsMobile from "../../hooks/useIsMobile";
 import type { Recipe } from "../../types/recipe";
@@ -77,9 +77,11 @@ const RecipeFilter = memo(({ updateRecipes }: RecipeFilterProps) => {
     <div className={styles.filtersContainer}>
       <header className={styles.filtersHeader}>
         <h3>Filters</h3>
-        <span className={styles.clearFilters} onClick={handleClearAllFilters}>
-          Clear Filters
-        </span>
+        {activeTag && (
+          <span className={styles.clearFilters} onClick={handleClearAllFilters}>
+            Clear Filters
+          </span>
+        )}
       </header>
 
       <section className={styles.filters}>
