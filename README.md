@@ -21,13 +21,53 @@ npm install
 
 # 3. Add .env file
 touch .env
-// add the following keys
+```
+---
+
+## Environment Variables
+
+Please configure following env variables in your .env file
+
 VITE_API_BASE_URL=https://dummyjson.com
 VITE_LAUNCH_DARKLY_CLIENT_ID=<your-launch-darkly-client-id>
+
+---
+
+## How it Works?
+
+I've created two users, one with a free plan & one with a premium
+
+Free plan user
+
+```plaintext
+email - johndoe@recipes.com
+password - password123
 ```
+Premium plan user
+
+```plaintext
+email - ethanhunt@recipes.com
+password - impossible 
+```
+---
+
+## Feature Flags
+
+Currently, i've configured two feature flags, one for filters on recipes page & another one for premium users in recipe details page
+The user with free plan cannot view recipe instructions.
+
+#### Incase you're interested in configuring flags yourself,
+
+- To toggle the feature flag, please setup an account with [LaunchDarkly](https://launchdarkly.com/)
+- Create flags - `filter-by-tags` & `foodies-premium-users`.
+- For flag `foodies-premium-users`, add a rule in Launch Darkly saying `If user plan starts with premium` serve `true`
+- Toggle the flag values in Launch Darkly & watch the variations in Filters & Instructions.
+
+> **Note:** Strangely, I did not find `equal to` operator in Launch Darkly Rule UI.
+
 
 ## Live Demo
 
-This app is deployed on Vercel. Please checkout [Feature Flag Demo](https://feature-flag-demo-7k8r25wcc-varun-kelkars-projects.vercel.app/).
+Please checkout [Feature Flag Demo](https://feature-flag-demo-7k8r25wcc-varun-kelkars-projects.vercel.app/).
 
-To toggle the feature flag, please setup an account with [LaunchDarkly](https://launchdarkly.com/) & create a flag named filter-by-tags. Toggle the flag value in Launch Darkly & watch the variations in Filters UI.
+
