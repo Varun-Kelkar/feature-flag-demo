@@ -49,6 +49,9 @@ Premium plan user
 email - ethanhunt@recipes.com
 password - impossible 
 ```
+
+The user with **Free Plan** will not be able to see **Recipe Instructions** on Recipe Details page.
+
 ---
 
 ## Feature Flags
