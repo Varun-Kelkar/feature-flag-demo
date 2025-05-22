@@ -74,6 +74,6 @@ The user with free plan cannot view recipe instructions.
 
 ## Live Demo
 
-Please checkout [Feature Flag Demo](https://feature-flag-demo-7k8r25wcc-varun-kelkars-projects.vercel.app/).
+Please checkout [Feature Flag Demo](https://feature-flag-demo-one.vercel.app)
 
 
