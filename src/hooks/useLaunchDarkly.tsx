@@ -14,7 +14,6 @@ export function useLaunchDarkly(user: User) {
   const [flags, setFlags] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    console.log("user", user);
     const client = initialize(clientSideId, {
       key: user?.id?.toString() ?? fallBackUser.key,
       name: user?.name ?? fallBackUser.name,
