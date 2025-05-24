@@ -124,7 +124,7 @@ const RecipeDetails = () => {
               fallback={<FeatureFallBack />}
             >
               <div>Instructions</div>
-              <ul>
+              <ul className={styles.instructionsList}>
                 {recipe.instructions.map((instruction, index) => (
                   <li key={index}>{instruction}</li>
                 ))}
